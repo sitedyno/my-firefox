@@ -7,6 +7,8 @@ profiles:
       - "js/user.js"
       - "js/Smoothfox.js"
       - "js/overrides.js"
+    user_json:
+      - "json/customKeys.json"
     user_chrome_css:
       - "css/userChrome.css"
     user_content_css:
@@ -15,6 +17,8 @@ profiles:
     user_js:
       - "js/user.js"
       - "js/overrides.js"
+    user_json:
+      - "json/customKeys.json"
     user_chrome_css:
       - "css/userChrome.css"
     user_content_css:

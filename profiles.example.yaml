@@ -1,0 +1,21 @@
+# copy this file to profiles.yaml and customize it for your system & needs
+# replace <user> with your user name
+# replace <profile-path> with the directory of the profile you want to change
+profiles:
+  - path: "/mnt/c/Users/<user>/AppData/Roaming/Mozilla/Firefox/Profiles/<profile-path>"
+    user_js:
+      - "js/user.js"
+      - "js/Smoothfox.js"
+      - "js/overrides.js"
+    user_chrome_css:
+      - "css/userChrome.css"
+    user_content_css:
+      - "css/userContent.css"
+  - path: "/home/<user>/.mozilla/Profiles/<profile-path>"
+    user_js:
+      - "js/user.js"
+      - "js/overrides.js"
+    user_chrome_css:
+      - "css/userChrome.css"
+    user_content_css:
+      - "css/userContent.css"

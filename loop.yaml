@@ -1,0 +1,15 @@
+- name: Does the profile exist?
+  ansible.builtin.stat:
+    path: "{{ item.path }}"
+  register: register_exists
+
+- name: Bundling user.js
+  ansible.builtin.shell: cat {{ item.user_js | join(" ") }} > tmp/user.js
+  when: register_exists.stat.exists
+
+- name: Copying user.js
+  ansible.builtin.copy:
+    src: tmp/user.js
+    dest: "{{ item.path }}/user.js"
+    remote_src: false
+  when: register_exists.stat.exists

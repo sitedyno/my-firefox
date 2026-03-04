@@ -1,0 +1,13 @@
+---
+- name: My Firefox
+  hosts: default
+  become: false
+
+  vars_files:
+    - profiles.yaml
+
+
+  tasks:
+    - name: Install
+      ansible.builtin.include_tasks: loop.yaml
+      loop: "{{ profiles }}"

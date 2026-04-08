@@ -1,15 +1,33 @@
 - name: Does the profile exist?
   ansible.builtin.stat:
     path: "{{ item.path }}"
-  register: register_exists
+  register: register_profile_exists
 
 - name: Bundling user.js
   ansible.builtin.shell: cat {{ item.user_js | join(" ") }} > tmp/user.js
-  when: register_exists.stat.exists
+  when: register_profile_exists.stat.exists
 
 - name: Copying user.js
   ansible.builtin.copy:
     src: tmp/user.js
     dest: "{{ item.path }}/user.js"
     remote_src: false
-  when: register_exists.stat.exists
+  when: register_profile_exists.stat.exists
+
+- name: Create the chrome directory
+  ansible.builtin.file:
+    path: "{{ item.path }}/chrome"
+    state: directory
+    mode: '0755'
+  when: register_profile_exists.stat.exists
+
+- name: Bundling userContent.css
+  ansible.builtin.shell: cat {{ item.user_content_css | join(" ") }} > tmp/userContent.css
+  when: register_profile_exists.stat.exists
+
+- name: Copying userContent.css
+  ansible.builtin.copy:
+    src: tmp/userContent.css
+    dest: "{{ item.path }}/chrome/userContent.css"
+    remote_src: false
+  when: register_profile_exists.stat.exists
